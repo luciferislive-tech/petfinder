@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="dashboard-container">
+    <h2 class="section-title">My Adopted Pets</h2>
+
+    {% if pets %}
+        <div class="pet-grid">
+            {% for pet in pets %}
+                <div class="pet-card">
+                    <h3>{{ pet.name }} ({{ pet.species }})</h3>
+                    <p><strong>Breed:</strong> {{ pet.breed or "Unknown" }}</p>
+                    <p><strong>Age:</strong> {{ pet.age }} years</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="empty-message">You haven't adopted any pets yet. <a href="{{ url_for('adopt_page') }}">Find your furry friend!</a></p>
+    {% endif %}
+</div>
+
+<style>
+    /* Dashboard Container */
+    .dashboard-container {
+        max-width: 900px;
+        margin: 30px auto;
+        padding: 20px;
+        background: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    /* Section Title */
+    .section-title {
+        font-size: 2rem;
+        color: #6a0dad;
+        margin-bottom: 20px;
+    }
+
+    /* Pet Grid Layout */
+    .pet-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        padding: 20px 0;
+    }
+
+    /* Pet Cards */
+    .pet-card {
+        background: #fff;
+        border: 1px solid #d8b6ff;
+        border-radius: 10px;
+        padding: 15px;
+        text-align: left;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+    /* Hover Effect */
+    .pet-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .pet-card h3 {
+        color: #6a0dad;
+        margin-bottom: 5px;
+    }
+
+    .pet-card p {
+        color: #444;
+        font-size: 0.9rem;
+    }
+
+    /* Empty Message */
+    .empty-message {
+        font-size: 1.1rem;
+        color: #666;
+    }
+
+    .empty-message a {
+        color: #8a2be2;
+        text-decoration: underline;
+    }
+</style>
+
+{% endblock %}

@@ -1,0 +1,211 @@
+{% extends "base.html" %}
+{% block title %}Pet Adoption - Home{% endblock %}
+{% block content %}
+
+
+<html>
+ <head>
+  <title>
+   Pet Adoption - Home
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 60vh;
+            background: linear-gradient(135deg, #6a0dad, #9c27b0);
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        .btn {
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .btn-primary {
+            background: #512da8;
+            color: white;
+        }
+        .btn-success {
+            background: #7e57c2;
+            color: white;
+        }
+        .btn:hover {
+            opacity: 0.8;
+        }
+        .flip-card {
+            background-color: transparent;
+            width: 300px;
+            height: 400px;
+            perspective: 1000px;
+        }
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        }
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 10px;
+        }
+        .flip-card-front {
+            background-color: #bbb;
+            color: black;
+            height: 200px;
+        }
+        .flip-card-back {
+            background-color: #512da8;
+            color: white;
+            transform: rotateY(180deg);
+        }
+  </style>
+ </head>
+ <body class="bg-gray-100">
+  <section class="hero">
+   <div class="hero-content">
+    <h1 class="text-4xl font-bold">
+     Welcome to Pet Adoption
+    </h1>
+    <p class="text-lg">
+     Find your perfect companion and give them a loving home.
+    </p>
+    <div>
+     <a class="btn btn-primary" href="/register">
+      Join Us
+     </a>
+     <a class="btn btn-success" href="/login">
+      Sign In
+     </a>
+    </div>
+   </div>
+  </section>
+  <section class="py-10">
+   <div class="container mx-auto">
+    <h2 class="text-3xl font-bold text-center mb-8">
+     Meet Our Pets
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+     <div class="flip-card">
+      <div class="flip-card-inner">
+       <div class="flip-card-front">
+        <img alt="Image of a cute dog with a happy expression" height="400" src="https://storage.googleapis.com/a1aa/image/aBVl4rnPxVjL0wfPDBMSYTDr6OfveYfZ8VypYIq0caw.jpg" width="300"/>
+       </div>
+       <div class="flip-card-back p-4">
+        <h3 class="text-xl font-bold">
+         Buddy
+        </h3>
+        <p>
+            Buddy is a friendly and affectionate dog with a heart full of love and loyalty. Always eager to play and explore, he brings joy to everyone around him with his wagging tail and warm, expressive eyes. Whether he’s chasing a ball, going on adventures, or simply curling up beside you, Buddy is the perfect companion. His gentle nature and boundless energy make him a beloved member of the family, always ready to offer comfort, excitement, and unconditional love.
+        </p>
+       </div>
+      </div>
+     </div>
+     <div class="flip-card">
+      <div class="flip-card-inner">
+       <div class="flip-card-front">
+        <img alt="Image of a fluffy cat with green eyes" height="400" src="https://storage.googleapis.com/a1aa/image/Gx99fQU3lywlk9xLlpDUF-r6VQxAngTW6FP_E0jd0ZY.jpg" width="300"/>
+       </div>
+       <div class="flip-card-back p-4">
+        <h3 class="text-xl font-bold">
+         Whiskers
+        </h3>
+        <p>
+            Whisker is a curious and playful cat with a mischievous streak and a heart full of charm. With sleek fur and striking eyes that seem to hold a world of mystery, he loves to explore every corner of his home, always on the lookout for new adventures. Whether he’s chasing a toy, basking in a sunny spot, or curling up in your lap for a cozy nap, Whisker brings warmth and joy to everyone around him.
+        </p>
+       </div>
+      </div>
+     </div>
+     <div class="flip-card">
+      <div class="flip-card-inner">
+       <div class="flip-card-front">
+        <img alt="Image of a small rabbit with floppy ears" height="400" src="https://storage.googleapis.com/a1aa/image/VIV7DasehmtDcJpKIcmJZ5qjHuxIFG_sVOAofvhDnPY.jpg" width="300"/>
+       </div>
+       <div class="flip-card-back p-4">
+        <h3 class="text-xl font-bold">
+         Thumper
+        </h3>
+        <p>
+            Thumper is a tiny ball of energy with a big personality! This adorable hamster is always on the move, scurrying around his enclosure, burrowing into his bedding, and spinning his wheel at top speed. With his soft fur, twitching nose, and tiny paws, Thumper is as cute as can be. He loves nibbling on treats, exploring new hiding spots, and occasionally pausing for a cuddle. Playful, curious, and full of life.
+        </p>
+       </div>
+      </div>
+     </div>
+     <div class="flip-card">
+      <div class="flip-card-inner">
+       <div class="flip-card-front">
+        <img alt="Image of a parrot with vibrant feathers" height="400" src="https://storage.googleapis.com/a1aa/image/gsDZcDJsbCfXrOqK-hFtOGQBzP85jm9AV8A9ExDBTno.jpg" width="300"/>
+       </div>
+       <div class="flip-card-back p-4">
+        <h3 class="text-xl font-bold">
+         Polly
+        </h3>
+        <p>
+            Polly is a lively and intelligent parrot with a personality as vibrant as her feathers! Always full of chatter, she loves mimicking sounds, singing tunes, and entertaining everyone with her playful antics. With her bright eyes and curious nature, Polly enjoys exploring, perching on shoulders, and showing off her clever tricks. She’s affectionate, social, and always ready for a conversation—especially if treats are involved! Whether she’s whistling a happy tune or calling out your name.
+        </p>
+       </div>
+      </div>
+     </div>
+     <div class="flip-card">
+      <div class="flip-card-inner">
+       <div class="flip-card-front">
+        <img alt="Image of a hamster running on a wheel" height="400" src="https://storage.googleapis.com/a1aa/image/AoD0G3taYoPaee5VTDJY6DE8jky5H8cA9UV_cZpbPh0.jpg" width="300"/>
+       </div>
+       <div class="flip-card-back p-4">
+        <h3 class="text-xl font-bold">
+         Nibbles
+        </h3>
+        <p>
+            Nibbles is a tiny, fluffy hamster with a big appetite for adventure—and snacks! Always busy exploring, burrowing, and nibbling on tasty treats, he brings endless joy with his playful and curious nature. His twitching whiskers and tiny paws make him irresistibly adorable, and his love for snuggling into cozy bedding makes him the perfect little cuddle buddy. Whether he’s scurrying through tunnels or stuffing his cheeks with food, Nibbles is full of charm and personality.
+        </p>
+       </div>
+      </div>
+     </div>
+     <div class="flip-card">
+      <div class="flip-card-inner">
+       <div class="flip-card-front">
+        <img alt="Image of a goldfish swimming in a tank" height="400" src="https://storage.googleapis.com/a1aa/image/ueXvqV313LqOf7_9YvnuIgoH10f-z7ZSRSyiNsjsshI.jpg" width="300"/>
+       </div>
+       <div class="flip-card-back p-4">
+        <h3 class="text-xl font-bold">
+         Goldie
+        </h3>
+        <p>
+            Goldie is a shimmering, graceful goldfish with a dazzling golden hue that lights up any aquarium. With her flowing fins and gentle, gliding movements, she brings a sense of peace and beauty to her surroundings. Curious and lively, Goldie loves exploring her tank, playfully swimming through bubbles, and darting around decorations. Whether she’s gracefully drifting or eagerly swimming to the surface at feeding time.
+        </p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section>
+
+ </body>
+</html>
+{% endblock %}

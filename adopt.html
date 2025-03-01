@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% block title %}Adopt a Pet{% endblock %}
+
+{% block content %}
+<section class="adopt-section">
+    <h1 class="page-title">Adopt a Pet</h1>
+    <p class="subtitle">Meet our adorable friends looking for a loving home 🐾</p>
+
+    {% if pets %}
+        <div class="pet-grid">
+            {% for pet in pets %}
+                <div class="pet-card">
+                    <h3 class="pet-name">{{ pet.name }}</h3>
+                    <p><strong>Species:</strong> {{ pet.species }}</p>
+                    <p><strong>Breed:</strong> {{ pet.breed or 'N/A' }}</p>
+                    <p><strong>Age:</strong> {{ pet.age or 'N/A' }}</p>
+                    
+                    <div class="pet-actions">
+                        <form method="POST" action="{{ url_for('adopt_pet', pet_id=pet.id) }}">
+                            <button type="submit" class="btn-adopt">Adopt {{ pet.name }}</button>
+                        </form>
+                        {% if pet.donated_by_id == current_user.id %}
+                            <p class="donated-by">Donated by You</p>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="empty-state">No pets available right now. Check <a href="{{ url_for('donated_pets') }}">donated pets</a> or donate one above!</p>
+    {% endif %}
+</section>
+
+<style>
+    /* Page Layout */
+    .adopt-section {
+        max-width: 1000px;
+        margin: 30px auto;
+        padding: 20px;
+        text-align: center;
+    }
+
+    /* Titles */
+    .page-title {
+        font-size: 2.5rem;
+        color: #f4e3ff;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .subtitle {
+        font-size: 1.2rem;
+        color: #000000;
+        margin-bottom: 30px;
+    }
+
+    /* Grid Layout for Pets */
+    .pet-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        padding: 20px 0;
+    }
+
+    /* Pet Cards */
+    .pet-card {
+        background: #fff;
+        border: 1px solid #d8b6ff;
+        border-radius: 10px;
+        padding: 15px;
+        text-align: left;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+    /* Hover Effect */
+    .pet-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Pet Name */
+    .pet-name {
+        font-size: 1.5rem;
+        color: #6a0dad;
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
+
+    /* Adopt Button */
+    .btn-adopt {
+        background-color: #8a2be2;
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background 0.3s ease;
+    }
+
+    .btn-adopt:hover {
+        background-color: #6a0dad;
+    }
+
+    /* Donated By */
+    .donated-by {
+        color: #6a0dad;
+        font-size: 0.9rem;
+        margin-top: 10px;
+        font-weight: bold;
+    }
+
+    /* Empty State */
+    .empty-state {
+        font-size: 1.2rem;
+        color: #333;
+        margin-top: 20px;
+    }
+
+    .empty-state a {
+        color: #8a2be2;
+        font-weight: bold;
+    }
+</style>
+{% endblock %}

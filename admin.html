@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% block title %}Admin Panel{% endblock %}
+{% block content %}
+    <section class="admin-section">
+        <h1 class="text-4xl font-bold text-center mb-6">Admin Panel</h1>
+        <p class="text-lg text-center mb-10">Manage users and pets</p>
+
+        <div class="dashboard-section">
+            <h2 class="text-2xl font-semibold mb-4">Users</h2>
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Admin</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ 'Yes' if user.is_admin else 'No' }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="dashboard-section">
+            <h2 class="text-2xl font-semibold mb-4">Pets</h2>
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Species</th>
+                        <th>Breed</th>
+                        <th>Age</th>
+                        <th>Available</th>
+                        <th>Adopted By</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pet in pets %}
+                        <tr>
+                            <td>{{ pet.id }}</td>
+                            <td>{{ pet.name }}</td>
+                            <td>{{ pet.species }}</td>
+                            <td>{{ pet.breed or 'N/A' }}</td>
+                            <td>{{ pet.age or 'N/A' }}</td>
+                            <td>{{ 'Yes' if pet.available else 'No' }}</td>
+                            <td>{{ pet.adopted_by or 'N/A' }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <style>
+        body {
+            background-color: #f3f4f6; /* Light gray background */
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .admin-section {
+            max-width: 1200px;
+            margin: auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        h1, h2 {
+            color: #4a4a4a; /* Dark gray for headings */
+        }
+
+        .dashboard-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #e2e8f0; /* Light border */
+            border-radius: 8px;
+            background: #ffffff; /* White background for sections */
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .admin-table th, .admin-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0; /* Light border for table rows */
+        }
+
+        .admin-table th {
+            background-color: #914ae2; /* Blue background for header */
+            color: white; /* White text for header */
+        }
+
+        .admin-table tr:hover {
+            background-color: #f1f5f9; /* Light gray on hover */
+        }
+
+        .admin-table td {
+            color: #4a4a4a; /* Dark gray for table text */
+        }
+    </style>
+{% endblock %}

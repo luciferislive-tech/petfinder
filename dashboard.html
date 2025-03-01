@@ -1,0 +1,202 @@
+{% extends "base.html" %}
+{% block title %}Dashboard - Pet Adoption{% endblock %}
+{% block content %}
+    <section class="dashboard-section container mt-5">
+        <h1 class="text-center fade-in" style="color: #6a0dad; font-weight: 700;">Hello, {{ current_user.username }}!</h1>
+        <p class="text-center fade-in" style="color: #8a2be2; font-size: 1.1rem;">Your pet adoption journey starts here!</p>
+
+        <!-- Donate a Pet Section -->
+        <div class="dashboard-card slide-up">
+            <h2>Donate a Pet</h2>
+            <form method="POST" action="{{ url_for('donate_pet') }}">
+                <div class="form-group">
+                    <label>Pet Name</label>
+                    <input type="text" name="name" class="form-control" placeholder="Enter pet's name" required>
+                </div>
+                <div class="form-group">
+                    <label>Species</label>
+                    <input type="text" name="species" class="form-control" placeholder="e.g., Dog, Cat" required>
+                </div>
+                <div class="form-group">
+                    <label>Breed (Optional)</label>
+                    <input type="text" name="breed" class="form-control" placeholder="e.g., Golden Retriever">
+                </div>
+                <div class="form-group">
+                    <label>Age (Optional)</label>
+                    <input type="number" name="age" class="form-control" placeholder="Enter age in years" min="0">
+                </div>
+                <button type="submit" class="btn-primary">Donate Pet</button>
+            </form>
+        </div>
+
+        <!-- My Adopted Pets -->
+        <div class="dashboard-card mt-5 fade-in">
+            <h2>My Adopted Pets</h2>
+            {% if adopted_pets %}
+                <div class="pet-grid">
+                    {% for pet in adopted_pets %}
+                        <div class="pet-card">
+                            <h3>{{ pet.name }}</h3>
+                            <p>Species: {{ pet.species }}</p>
+                            <p>Breed: {{ pet.breed or 'N/A' }}</p>
+                            <p>Age: {{ pet.age or 'N/A' }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="empty-state">No adopted pets yet. <a href="{{ url_for('adopt_page') }}">Find one now!</a></p>
+            {% endif %}
+        </div>
+
+        <!-- My Donated Pets -->
+        <div class="dashboard-card mt-5 fade-in">
+            <h2>My Donated Pets</h2>
+            {% if donated_pets %}
+                <div class="pet-grid">
+                    {% for pet in donated_pets %}
+                        <div class="pet-card">
+                            <h3>{{ pet.name }}</h3>
+                            <p>Species: {{ pet.species }}</p>
+                            <p>Breed: {{ pet.breed or 'N/A' }}</p>
+                            <p>Age: {{ pet.age or 'N/A' }}</p>
+                            <p>Status: <span class="status">{{ 'Available' if pet.available else 'Adopted' }}</span></p>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="empty-state">No pets donated yet. Fill out the form above to donate!</p>
+            {% endif %}
+        </div>
+    </section>
+
+    <style>
+        /* Light Purple Theme */
+        :root {
+            --primary-color: #6a0dad;
+            --secondary-color: #8a2be2;
+            --background-color: #f3e8ff;
+            --text-color: #4a0072;
+            --card-bg: #fff;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --border-radius: 12px;
+        }
+
+        body {
+            background-color: var(--background-color);
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+        }
+
+        .dashboard-section {
+            opacity: 0;
+            animation: fadeIn 1s ease-in forwards;
+        }
+
+        .dashboard-card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 10px var(--shadow-color);
+            border: 2px solid #d8b6ff;
+            animation: slideUp 0.8s ease-in-out forwards;
+        }
+
+        .dashboard-card h2 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #d8b6ff;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 1rem;
+            width: 100%;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-color);
+        }
+
+        .pet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .pet-card {
+            background: white;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 8px var(--shadow-color);
+            text-align: center;
+            border: 1px solid #d8b6ff;
+        }
+
+        .pet-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .status {
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+        .empty-state {
+            text-align: center;
+            font-size: 1rem;
+            color: #8a2be2;
+        }
+
+        .empty-state a {
+            text-decoration: none;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 1.5s ease-in-out forwards;
+        }
+
+        .slide-up {
+            transform: translateY(20px);
+            opacity: 0;
+            animation: slideUp 0.8s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+{% endblock %}
